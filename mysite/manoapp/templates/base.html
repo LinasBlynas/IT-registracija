@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="lt">
+
+<head>
+    {% block "title" %}<title>ŠPT pagalba</title>{% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!--FONT AWESOME-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofzKahc8NishRbq3VqE1aQKJ6zI2tq1PiA" crossorigin="anonymous">
+
+    <!--GOOGLE FONTS-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet">
+
+    <!-- Add additional CSS in static file -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+
+<div class="p-3 text-black text-center" style="background-color: #e3f2fd;">
+    <img src="{% static 'img/logoN.png' %}" height="120">
+    <h4> IT pagalba </h4>
+</div>
+
+<nav class="navbar navbar-expand-sm navbar-light" style="background-color: #2596be;">
+    <div class="container-fluid">
+
+        {% if user.is_authenticated %}
+
+        <ul class="navbar-nav">
+            <li class="navbar-brand">
+                <svg class="bi bi-person" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM8 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z"
+                          clip-rule="evenodd"/>
+                </svg>
+                {{ user.get_username }}
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'darbu_sarasas' %}"> Visi darbai </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'sukurti_irasa' %}"> Registruoti naują </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'mano_darbai' %}"> Mano darbai </a>
+            </li>
+            <li class="nav-item float-end">
+                <a class="nav-link text-white" href="{% url 'logout'%}?next=/">Atsijungti</a>
+            </li>
+        </ul>
+
+        {% else %}
+
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'index' %}"> Pradžia </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link text-white"
+                   href="{% url 'login' %}?next={% url 'mano_darbai' %}">Prisijungti</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link text-white" href="{% url 'register' %}"> Registracija </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item float-end"><a class="nav-link text-white" href="{% url 'login'%}?next=/admin/">
+                Administravimas </a>
+            </li>
+        </ul>
+        {% endif %}
+    </div>
+</nav>
+
+<div>
+    {% block "content" %}{% endblock %}
+</div>
+
+<div class="bottom mt-5 p-2 text-white text-center" style="background-color:  #2596be;">
+    <p> Visos teisės saugomos @ Jonavos rajono švietimo pagalbos tarnyba</p>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block "content" %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="card-title mb-4 text-center">Registruoti naują darbą</h3>
+                    <form method="post" action="{% url 'sukurti_irasa' %}" class="needs-validation" novalidate>
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            {{ forma.darbuotojas.label_tag }}
+                            {{ forma.darbuotojas }}
+                            {{ forma.darbuotojas.errors }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ forma.darbai.label_tag }}
+                            {{ forma.darbai }}
+                            {{ forma.darbai.errors }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ forma.laikas.label_tag }}
+                            {{ forma.laikas }}
+                            {{ forma.laikas.errors }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ forma.pastaba.label_tag }}
+                            {{ forma.pastaba }}
+                            {{ forma.pastaba.errors }}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block" style="background-color: #2596be;">
+                            Sukurti įrašą
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block "content" %}
+
+{% if user.is_authenticated %}
+
+<div class="container mt-3">
+
+    <h2>Mano darbų sąrašas</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Data</th>
+            <th>Uzsakovas</th>
+            <th>Darbuotojas</th>
+            <th>Statusas</th>
+        </tr>
+        </thead>
+
+        {% for x in irasai %}
+        {% if x.klientai == user %}
+        <tbody>
+        <tr>
+            <td>
+                <a href="#" class="btn btn-info" role="button"
+                   onClick="window.open('{{ x.id }} ','pagename','resizable,height=500,width=800,screenX=250,left=250,screenY=150,top=150,status=yes,menubar=yes'); return false;">Redaguoti</a>
+            </td>
+            <td>{{ x.laikas }}</td>
+            <td>{{ x.klientai }}</td>
+            <td>{{ x.darbuotojas }}</td>
+            {% if x.padaryta == True %}
+            <td>Darbas padarytas</td>
+            {% else %}
+            <td>Neivykdytas</td>
+            {% endif %}
+        </tr>
+        </tbody>
+
+        {% else %}
+
+        {% endif %}
+
+        {% endfor %}
+
+    </table>
+</div>
+
+
+{% else %}
+<div class="container align-items-center">
+    <h4>Esate neprisijungę</h4>
+    <a href="{% url 'login' %}">Prisijungti</a>
+</div>
+{% endif %}
+
+{% endblock %}

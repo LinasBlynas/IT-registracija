@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block "title" %}{% endblock %}
+
+{% block "content" %}
+
+{% if form.errors %}
+<h3 class="alert alert-danger mt-4 text-center">Prisijungimo klaida, bandykite dar kartą!</h3>
+{% endif %}
+
+{% if next %}
+{% if user.is_authenticated %}
+<h4 class="alert alert-info mt-4 text-center"> Neturite prieigos prie šios informacijos. Turite prisijungti.</h4>
+{% endif %}
+{% endif %}
+
+<div class="container mt-5 col-md-3 card shadow card-body">
+    <h3 class="card-title mb-4 text-center">Prisijunkite</h3>
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Vartotojas:</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>Slaptažodis:</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
+        <input type="submit" class="btn mt-2 btn-primary mx-auto d-block" style="background-color: #2596be;"
+               value="Prisijungti"/>
+        <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
+    <div class="text-center">
+
+        <p><a href="{% url 'password_reset' %}">Pamiršote slaptažodį?</a></p>
+    </div>
+
+</div>
+{% endblock %}

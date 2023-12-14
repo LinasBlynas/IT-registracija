@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block "content" %}
+
+{% if user.is_authenticated %}
+
+<div class="container mt-3">
+
+    <h2>Darbų sąrašas</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Data</th>
+            <th>Uzsakovas</th>
+            <th>Darbuotojas</th>
+            <th>Statusas</th>
+        </tr>
+        </thead>
+        {% for x in irasai %}
+        <tbody>
+        <tr>
+            <td>
+                {{ x.id }}
+            </td>
+            <td>{{ x.laikas }}</td>
+            <td>{{ x.klientai }}</td>
+            <td>{{ x.darbuotojas }}</td>
+            {% if x.padaryta == True %}
+            <td>Darbas padarytas</td>
+            {% else %}
+            <td>Neivykdytas</td>
+            {% endif %}
+        </tr>
+        </tbody>
+
+        {% endfor %}
+
+    </table>
+</div>
+
+<div class="container mt-3">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">&laquo; pirmas</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">atgal</a></li>
+        {% endif %}
+        <li class="page-link">{{ page_obj.number }} iš {{ page_obj.paginator.num_pages }}</li>
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Pirmyn</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">paskutinis
+            &raquo;</a></li>
+        {% endif %}
+        page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>-->
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+            {% else %}
+              <div class="container align-items-center" >
+                <h4>Esate neprisijungę</h4>
+                <a href="{% url 'login' %}">Prisijungti</a>
+              </div>
+            {% endif %}
+
+{% endblock %}
