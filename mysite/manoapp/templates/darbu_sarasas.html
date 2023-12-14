@@ -55,18 +55,12 @@
     </ul>
 </div>
 
+{% else %}
 
-
-
-
-
-
-
-            {% else %}
-              <div class="container align-items-center" >
-                <h4>Esate neprisijungę</h4>
-                <a href="{% url 'login' %}">Prisijungti</a>
-              </div>
-            {% endif %}
+<div class="container align-items-center">
+    <h4>Esate neprisijungę</h4>
+    <a href="{% url 'login' %}">Prisijungti</a>
+</div>
+{% endif %}
 
 {% endblock %}

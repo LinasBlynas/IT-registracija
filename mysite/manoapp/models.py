@@ -67,4 +67,3 @@ class Naujienos(models.Model):
     class Meta:
         verbose_name = "Naujienos"
         verbose_name_plural = 'Naujienos'
-
